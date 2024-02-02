@@ -26,7 +26,9 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven-
       - name: Set POM Version
-        run: mvn versions:set versions:commit -DnewVersion=${{ github.ref_name }}
+        run: | 
+          version = $(./version.sh ${{ github.ref_name }} feature)
+          mvn versions:set versions:commit -DnewVersion=version
       - name: Build Jar
         run: mvn --batch-mode clean package -P cli
         env:
