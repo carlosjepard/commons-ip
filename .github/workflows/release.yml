@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
           fetch-depth: 0
@@ -38,10 +38,8 @@ jobs:
         run:  mvn --batch-mode deploy -Djacoco.skip=true -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Git add
-        run: git add pom.xml
       - name: Commit and push
-        uses: actions/checkout@master
+        uses: EndBug/add-and-commit@v9
         with:
           message: 'Add pom file'
           add: 'pom.xml --force'
