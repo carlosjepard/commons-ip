@@ -41,7 +41,7 @@ jobs:
       - name: Git add
         run: git add pom.xml
       - name: Commit and push
-        uses: EndBug/add-and-commit@v9
+        uses: actions/checkout@master
         with:
           message: 'Add pom file'
           add: 'pom.xml --force'
