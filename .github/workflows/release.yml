@@ -40,11 +40,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Git add
         run: git add pom.xml
-      - name: Commit & Push changes
-        uses: actions-js/push@master
+      - name: Commit and push
+        uses: EndBug/add-and-commit@v9
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          message: "Setting version 2.5.5"
+          message: 'Add pom file'
+          add: 'pom.xml --force'
       - name: Release to GitHub
         uses: softprops/action-gh-release@v1
         with:
