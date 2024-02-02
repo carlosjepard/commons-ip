@@ -24,7 +24,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/keeps/commons-ip</url>
+            <url>https://maven.pkg.github.com/carlosjepard/commons-ip</url>
         </repository>
     </distributionManagement>
 

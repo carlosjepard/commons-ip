@@ -28,11 +28,11 @@ jobs:
       - name: Set POM Version
         run: mvn versions:set versions:commit -DnewVersion=${{ github.ref_name }}
       - name: Build Jar
-        run: mvn --batch-mode clean package -P cli
+        run: mvn --batch-mode clean package -P cli -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy Jar
-        run:  mvn --batch-mode deploy -Djacoco.skip=true
+        run:  mvn --batch-mode deploy -Djacoco.skip=true -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit & Push changes
