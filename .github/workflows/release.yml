@@ -26,9 +26,7 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven-
       - name: Set POM Version
-        run: | 
-          version = $(./version.sh ${{ github.ref_name }} feature)
-          mvn versions:set versions:commit -DnewVersion=version
+        run: mvn versions:set versions:commit -DnewVersion=${{ github.ref_name }}
       - name: Build Jar
         run: mvn --batch-mode clean package -P cli
         env:
@@ -37,6 +35,11 @@ jobs:
         run:  mvn --batch-mode deploy -Djacoco.skip=true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: "Setting version 2.5.5"
       - name: Release to GitHub
         uses: softprops/action-gh-release@v1
         with:
