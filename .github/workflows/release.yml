@@ -45,6 +45,7 @@ jobs:
           message: 'Add pom file'
           add: 'pom.xml --force'
           default_author: github_actor
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Release to GitHub
         uses: softprops/action-gh-release@v1
         with:
